@@ -1,7 +1,10 @@
 import { forwardRef } from 'react'
 
 const getClassName = (props) => `
-  bg-${props.ghost ? 'transparent' : 'primary'}
+  ${props.ghost ? `
+    bg-transparents
+    border border-primary
+  ` : 'bg-primary'}
   hover:bg-primary text-light-1 font-bold inline-block
   py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:shadow-outline
   cursor-pointer

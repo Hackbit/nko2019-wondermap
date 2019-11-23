@@ -1,14 +1,16 @@
 import Input from './input'
 import Button from './button'
 
-export default ({ items, setItems, legend }) => (
-  <fieldset>
-    <legend>{legend}</legend>
+export default ({ items, setItems, legend, className }) => (
+  <fieldset className={className}>
+    <legend className='font-bold mb-4'>{legend}</legend>
     {items.map(({ key, value }, index) => (
-      <div key={index} className='mb-4'>
+      <div key={index} className='mb-4 flex'>
         <Input
+          aria-label='Key'
           placeholder='Key'
           value={key}
+          className='mr-2'
           onChange={(event) => setItems([
             ...items.slice(0, index),
             { key: event.target.value, value },
@@ -16,7 +18,9 @@ export default ({ items, setItems, legend }) => (
           ])}
         />
         <Input
+          aria-label='Value'
           placeholder='Value'
+          className='mr-2 flex'
           value={value}
           onChange={(event) => setItems([
             ...items.slice(0, index),
@@ -29,7 +33,7 @@ export default ({ items, setItems, legend }) => (
         </Button>
       </div>
     ))}
-    <Button type='button' onClick={() => setItems([ ...items, { key: '', value: '' }])}>
+    <Button ghost type='button' onClick={() => setItems([ ...items, { key: '', value: '' }])}>
       Add
     </Button>
   </fieldset>

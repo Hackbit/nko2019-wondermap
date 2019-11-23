@@ -8,7 +8,8 @@ module.exports = {
 
       black: '#000000',
       white: '#ffffff',
-      primary: '#5e81ac',
+      // primary: '#5e81ac',
+      primary: '#7950f2',
       error: '#bF616a',
 
       light: {
@@ -30,6 +31,9 @@ module.exports = {
       },
       borderColor: (theme) => ({
         default: theme('colors.dark.4')
+      }),
+      boxShadow: (theme) => ({
+        outline: `0 0 0 3px ${theme('colors.primary')}61`
       })
     }
   }

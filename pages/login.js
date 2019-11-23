@@ -48,6 +48,7 @@ export default () => {
             id='username'
             name='username'
             value={username}
+            className='mb-6'
             onChange={(event) => setUsername(event.target.value)}
           />
 

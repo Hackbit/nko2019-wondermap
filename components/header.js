@@ -22,15 +22,17 @@ export default ({ className }) => {
           </li>
         </ul>
         <ul className='flex items-center'>
-          <li>
-            {(profile.error || !profile.data) ? (
-              <Link href='/login'>
-                <LinkButton>Login</LinkButton>
-              </Link>
-            ) : (
-              <Button onClick={logout}>Logout</Button>
-            )}
-          </li>
+          {(profile.error || !profile.data) ? (
+            <Link href='/login'>
+              <LinkButton>Login</LinkButton>
+            </Link>
+          ) : (<>
+            <Button onClick={logout}>Logout</Button>
+            <img
+              src={`https://api.adorable.io/avatars/285/${encodeURIComponent(profile.data.user.username)}.png`}
+              className='h-10 w-10 ml-4 rounded-full object-cover'
+            />
+          </>)}
         </ul>
       </nav>
     </header>
