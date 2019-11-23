@@ -8,3 +8,13 @@ export default ({ children, className }) => (
     {children}
   </div>
 )
+
+export const CardLoader = ({ className }) => (
+  <div className={`
+    bg-dark-2
+    p-8 rounded-lg
+    loading
+    h-48
+    ${className || ''}
+  `} />
+)

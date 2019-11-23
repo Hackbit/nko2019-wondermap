@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 body {
   @apply bg-dark-1 text-light-2 font-primary;
 }
@@ -14,4 +26,8 @@ body {
 
 .transitions {
   transition: color 200ms, background 200ms, border 200ms, box-shadow 200ms;
+}
+
+.loading {
+  animation: loading 1s ease-in-out infinite;
 }

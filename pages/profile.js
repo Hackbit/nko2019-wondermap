@@ -4,7 +4,7 @@ import useSWR, { mutate } from 'swr'
 import Router from 'next/router'
 import Button from '../components/button'
 import Layout from '../components/layout'
-import Card from '../components/card'
+import Card, { CardLoader } from '../components/card'
 import Heading from '../components/heading'
 import ItemsInput from '../components/items-input'
 import { authedFetch, swrAuthedFetch, withAuthSync } from '../lib/client/auth'
@@ -61,7 +61,7 @@ const Page = ({ user }) => {
               Delete
             </Button>
           </Card>
-        )): 'Loading...'}
+        )): [ <CardLoader />, <CardLoader />, <CardLoader /> ]}
       </div>
     </Layout>
   )
