@@ -1,21 +1,34 @@
+import { forwardRef } from 'react'
+
+const shared = `
+  bg-dark-2
+  p-8 rounded-lg
+  break-words
+  relative
+`
+
 export default ({ children, className }) => (
   <div className={`
-    bg-dark-2
-    p-8 rounded-lg
-    break-words
-    relative
+    ${shared}
     ${className || ''}
   `}>
     {children}
   </div>
 )
 
+export const LinkCard = forwardRef((props, ref) => (
+  <a {...props} className={`
+    ${shared} block transitions
+    focus:outline-none focus:shadow-outline
+    hover:up cursor-pointer
+    ${props.className || ''}
+  `} ref={ref} />
+))
+
 export const CardLoader = ({ className }) => (
   <div className={`
-    bg-dark-2
-    p-8 rounded-lg
-    loading
-    h-48
+    ${shared}
+    loading h-48
     ${className || ''}
   `} />
 )

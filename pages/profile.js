@@ -1,74 +1,64 @@
 import '../styles/index.css'
-import { useState } from 'react'
 import useSWR, { mutate } from 'swr'
-import { Trash2 } from 'react-feather'
+import { Plus } from 'react-feather'
+import Link from 'next/link'
 import Router from 'next/router'
-import Button from '../components/button'
 import Layout from '../components/layout'
-import Card, { CardLoader, CardIcon } from '../components/card'
+import { CardLoader, LinkCard } from '../components/card'
 import Heading from '../components/heading'
-import Value from '../components/value'
-import ItemsInput from '../components/items-input'
+import Button from '../components/button'
 import { authedFetch, swrAuthedFetch, withAuthSync } from '../lib/client/auth'
-
-const emptyItem = {
-  key: '',
-  value: '',
-  type: 'TEXT'
-}
 
 const Page = ({ user }) => {
   const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: { user } })
-  const cards = useSWR('/api/cards', swrAuthedFetch)
-  const [ items, setItems ] = useState([ emptyItem ])
+  const lists = useSWR('/api/lists', swrAuthedFetch)
 
   return (
     <Layout profile={profile}>
-      <Heading>The Cards of {profile.data ? profile.data.user.name : 'Loading...'}</Heading>
-      <p className='mb-20'>{profile.data ? profile.data.user.username : 'Loading...'}</p>
-
-      <form className='mb-10' onSubmit={async (event) => {
-        event.preventDefault()
-        if (items.length > 0) {
-          setItems([ emptyItem ])
-          await authedFetch({}, '/api/add-card', { items })
-          mutate('/api/cards', { cards: [
-            ...cards.data.cards,
-            { items, _id: Math.random() }
-          ] })
-        }
-      }}>
-        <Card className='mb-4'>
-          <ItemsInput
-            items={items}
-            setItems={setItems}
-            legend='Items'
-          />
-        </Card>
-        <Button type='submit' disabled={items.length === 0}>
-          Submit!
+      <Heading className='mb-12'>
+        The Lists of {profile.data ? profile.data.user.name : 'Loading...'}{' '}
+        <Button
+          ghost className='ml-4 align-top rounded-full'
+          onClick={async () => {
+            const name = prompt('Name?')
+            await authedFetch({}, '/api/add-list', { name })
+            mutate('/api/lists', { lists: [
+              ...lists.data.lists,
+              { name, sharingId: Math.random(), __fake: true }
+            ] })
+          }}
+        >
+          <Plus />
         </Button>
-      </form>
+      </Heading>
 
-      <div className='grid'>
-        {cards.data ? cards.data.cards.map((data, cardIndex) => (
-          <Card key={data._id}>
-            {data.items.map(({ key, value, type }, index) => (
-              <div className='mb-1' key={index}>
-                <div className='font-bold text-light-1'>{key}</div>
-                <Value value={value} type={type} />
-              </div>
-            ))}
-            <CardIcon icon={Trash2} onClick={async () => {
-              await authedFetch({}, '/api/delete-card', { id: data._id })
-              mutate('/api/cards', { cards: [
-                ...cards.data.cards.slice(0, cardIndex),
-                ...cards.data.cards.slice(cardIndex + 1)
-              ] })
-            }} />
-          </Card>
-        )): [ <CardLoader />, <CardLoader />, <CardLoader /> ]}
-      </div>
+      {lists.data ? lists.data.lists.length ? (
+        <div className='grid'>
+          {lists.data.lists.map((data) => (
+            <Link href={data.__fake ? '#' : `/list/${encodeURIComponent(data.sharingId)}`}>
+              <LinkCard key={data.sharingId}>
+                <h2 className='text-light-1 font-bold'>
+                  {data.name}
+                </h2>
+                <p className='text-light-2'>
+                  This list is {data.public ? 'public' : 'private'}.
+                </p>
+              </LinkCard>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        // TODO: Better view here
+        <p className='text-dark-4 text-xl mt-16 text-center'>
+          No cards here! You should try creating one.
+        </p>
+      ) : (
+        <div className='grid'>
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+        </div>
+      )}
     </Layout>
   )
 }

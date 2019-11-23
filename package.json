@@ -15,7 +15,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-feather": "^2.0.3",
-    "swr": "^0.1.12"
+    "swr": "^0.1.12",
+    "uid-promise": "^1.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.2",
