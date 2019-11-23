@@ -86,12 +86,19 @@ Page.getInitialProps = async (ctx) => {
       ? Router.push('/no-access')
       : ctx.res.writeHead(302, { Location: '/no-access' }).end()
 
+  let user = null
+  try {  
+    user = (await authedFetch(ctx, '/api/profile')).user
+  } catch(error) {
+    // No-op, public lists exist
+  }
+
   try {
     const sharingId = ctx.query.sharingId
-    const { user } = await authedFetch(ctx, '/api/profile')
     const { cards, list } = await authedFetch(ctx, `/api/list?sharingId=${encodeURIComponent(sharingId)}`)
     return { user, cards, list }
   } catch (error) {
+    console.log(error)
     return await redirectOnError()
   }
 }

@@ -18,6 +18,10 @@ body {
   @apply bg-dark-1 text-light-2 font-primary;
 }
 
+::selection {
+  @apply bg-primary text-light-1;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

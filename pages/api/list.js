@@ -10,12 +10,22 @@ export default async (req, res) => {
     }
 
     const user = await getUser(req)
-    if (!user) return res.status(401).json({ message: 'Not logged in' })
+    const condition = user ? {
+      $or: [
+        { user },
+        { public: true }
+      ]
+    } : {
+      public: true
+    }
 
-    const list = await List.findOne({ sharingId, user })
+    const list = await List.findOne({
+      sharingId,
+      ...condition
+    })
     if (!list) return res.status(404).json({ message: 'List not found' })
 
-    const cards = await Card.find({ user, list })
+    const cards = await Card.find({ list })
     return res.status(200).json({ cards, list })
   } catch (error) {
     return res.status(400).json({ message: error.message })
