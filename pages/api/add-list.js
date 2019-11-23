@@ -19,7 +19,7 @@ export default async (req, res) => {
       user,
       name,
       sharingId,
-      public: false
+      isPublic: false
     })
     await list.save()
 

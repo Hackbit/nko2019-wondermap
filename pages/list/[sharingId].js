@@ -1,7 +1,7 @@
 import '../../styles/index.css'
 import { useState } from 'react'
 import useSWR, { mutate } from 'swr'
-import { Trash2 } from 'react-feather'
+import { Trash2, Share } from 'react-feather'
 import Router from 'next/router'
 import Button from '../../components/button'
 import Layout from '../../components/layout'
@@ -27,6 +27,17 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
     <Layout profile={profile}>
       <Heading className='mb-12'>
         The Cards in {list.name}
+
+        {hasAccess && (<>{' '}<Button
+          ghost className='ml-4 align-top rounded-full'
+          onClick={async () => {
+            const isPublic = confirm('Should your list be public?')
+            await authedFetch({}, '/api/share', { sharingId: list.sharingId, isPublic })
+            alert('Done! Copy the URL.')
+          }}
+        >
+          <Share />
+        </Button></>)}
       </Heading>
 
       {hasAccess && <Card className='mb-16'>

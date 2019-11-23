@@ -1,7 +1,6 @@
 export default ({ children, className, level = 1 }) => {
   const computedClassName = `
     text-${level === 1 ? 3 : level === 2 ? 2 : ''}xl font-bold text-light-1 mb-4
-    leading-tight
     ${className || ''}
   `
 
@@ -13,7 +12,7 @@ export default ({ children, className, level = 1 }) => {
     )
   } else if (level === 2) {
     return (
-      <h2 className={computedClassName}>
+      <h2 className={`${computedClassName} leading-tight`}>
         {children}
       </h2>
     )

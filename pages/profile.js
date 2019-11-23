@@ -17,6 +17,7 @@ const Page = ({ user }) => {
     <Layout profile={profile}>
       <Heading className='mb-12'>
         The Lists of {profile.data ? profile.data.user.name : 'Loading...'}{' '}
+        
         <Button
           ghost className='ml-4 align-top rounded-full'
           onClick={async () => {
@@ -41,7 +42,7 @@ const Page = ({ user }) => {
                   {data.name}
                 </h2>
                 <p className='text-light-2'>
-                  This list is {data.public ? 'public' : 'private'}.
+                  This list is {data.isPublic ? 'public' : 'private'}.
                 </p>
               </LinkCard>
             </Link>
