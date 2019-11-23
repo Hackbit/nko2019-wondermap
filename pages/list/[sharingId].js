@@ -26,7 +26,7 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
   return (
     <Layout profile={profile}>
       <Heading className='mb-12'>
-        The Cards in {list.name}
+        {list.name}
 
         {hasAccess && (<>{' '}<Button
           ghost className='ml-4 align-top rounded-full'

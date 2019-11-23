@@ -1,3 +1,5 @@
+import OG from './og'
+
 export default ({ value, type }) => {
   switch (type) {
     case 'TEXT': {
@@ -13,6 +15,11 @@ export default ({ value, type }) => {
           src={value}
           className='block w-full rounded'
         />
+      )
+    }
+    case 'EMBED': {
+      return (
+        <OG url={value} />
       )
     }
     default: {

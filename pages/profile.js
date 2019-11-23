@@ -1,10 +1,10 @@
 import '../styles/index.css'
 import useSWR, { mutate } from 'swr'
-import { Plus } from 'react-feather'
+import { Plus, Trash2 } from 'react-feather'
 import Link from 'next/link'
 import Router from 'next/router'
 import Layout from '../components/layout'
-import { CardLoader, LinkCard } from '../components/card'
+import { CardLoader, LinkCard, CardIcon } from '../components/card'
 import Heading from '../components/heading'
 import Button from '../components/button'
 import { authedFetch, swrAuthedFetch, withAuthSync } from '../lib/client/auth'
@@ -35,7 +35,7 @@ const Page = ({ user }) => {
 
       {lists.data ? lists.data.lists.length ? (
         <div className='grid'>
-          {lists.data.lists.map((data) => (
+          {lists.data.lists.map((data, listIndex) => (
             <Link href={data.__fake ? '#' : `/list/${encodeURIComponent(data.sharingId)}`}>
               <LinkCard key={data.sharingId}>
                 <h2 className='text-light-1 font-bold'>
@@ -44,6 +44,14 @@ const Page = ({ user }) => {
                 <p className='text-light-2'>
                   This list is {data.isPublic ? 'public' : 'private'}.
                 </p>
+                <CardIcon icon={Trash2} onClick={async (event) => {
+                  event.stopPropagation()
+                  await authedFetch({}, '/api/delete-list', { id: data._id })
+                  mutate('/api/lists', { lists: [
+                    ...lists.data.lists.slice(0, listIndex),
+                    ...lists.data.lists.slice(listIndex + 1)
+                  ] })
+                }} />
               </LinkCard>
             </Link>
           ))}
