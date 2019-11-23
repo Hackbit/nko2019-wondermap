@@ -7,8 +7,8 @@ export default ({ items, setItems, emptyItem, className }) => (
   <fieldset className={className}>
     <legend className='sr-only'>Items</legend>
     {items.map(({ key, value, type }, index) => (
-      <div key={index} className='flex mb-2'>
-        <Select className='mr-2' onChange={(event) => setItems([
+      <div key={index} className='block sm:flex mb-5 sm:mb-2'>
+        <Select className='mb-2 sm:mr-2 sm:mb-0' onChange={(event) => setItems([
           ...items.slice(0, index),
           { key, value, type: event.target.value },
           ...items.slice(index + 1)
@@ -24,7 +24,7 @@ export default ({ items, setItems, emptyItem, className }) => (
           aria-label='Key'
           placeholder='Key'
           value={key}
-          className='mr-2'
+          className='mb-2 sm:mr-2 sm:mb-0'
           onChange={(event) => setItems([
             ...items.slice(0, index),
             { key: event.target.value, value, type },
@@ -35,7 +35,7 @@ export default ({ items, setItems, emptyItem, className }) => (
         <Input
           aria-label='Value'
           placeholder='Value'
-          className='mr-2 flex'
+          className='mb-2 sm:mr-2 sm:mb-0'
           value={value}
           onChange={(event) => setItems([
             ...items.slice(0, index),
@@ -47,7 +47,7 @@ export default ({ items, setItems, emptyItem, className }) => (
         <Button ghost type='button' className='rounded-r-none' onClick={() => setItems([ ...items.slice(0, index + 1), emptyItem, ...items.slice(index + 1) ])}>
           <Plus />
         </Button>
-        <Button type='button' className='rounded-l-none' onClick={() => setItems([ ...items.slice(0, index), ...items.slice(index + 1) ])}>
+        <Button type='button' className='rounded-l-none' disabled={items.length === 1} onClick={() => setItems([ ...items.slice(0, index), ...items.slice(index + 1) ])}>
           <Trash2 />
         </Button>
       </div>

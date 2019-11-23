@@ -10,7 +10,7 @@ const Layout = ({ children, centered, profile }) => (
     </Head>
     <Header profile={profile} />
 
-    <main className={centered ? 'h-screen flex flex-col justify-center content-center' : 'mt-32'}>
+    <main className={centered ? 'h-screen flex flex-col justify-center content-center p-4' : 'mt-32 p-4'}>
       <div className={centered ? '' : 'max-w-5xl mx-auto'}>
         {children}
       </div>

@@ -16,6 +16,7 @@ export default ({ children, className }) => (
   </div>
 )
 
+// FIXME: next link inheritance not working
 export const LinkCard = forwardRef((props, ref) => (
   <a {...props} className={`
     ${shared} block transitions

@@ -60,7 +60,7 @@ const Page = ({ user: initialProfile, cards: initialCards, list }) => {
         {cards.data ? cards.data.cards.map((data, cardIndex) => (
           <Card key={data._id}>
             {data.items.map(({ key, value, type }, index) => (
-              <div className='mb-1' key={index}>
+              <div className='mb-3' key={index}>
                 <div className='font-bold text-light-1'>{key}</div>
                 <Value value={value} type={type} />
               </div>
