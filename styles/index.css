@@ -35,3 +35,11 @@ body {
 .hover\:up:hover {
   transform: translateY(-6px);
 }
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.content-box {
+  box-sizing: content-box;
+}

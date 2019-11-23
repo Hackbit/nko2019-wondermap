@@ -1,6 +1,7 @@
 export default ({ children, className, level = 1 }) => {
   const computedClassName = `
     text-${level === 1 ? 3 : level === 2 ? 2 : ''}xl font-bold text-light-1 mb-4
+    leading-tight
     ${className || ''}
   `
 

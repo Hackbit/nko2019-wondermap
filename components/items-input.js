@@ -1,12 +1,13 @@
 import Input, { Select } from './input'
+import { Trash2, Plus } from 'react-feather'
 import Button from './button'
 import types from '../lib/shared/types'
 
-export default ({ items, setItems, legend, className }) => (
+export default ({ items, setItems, emptyItem, className }) => (
   <fieldset className={className}>
-    <legend className='font-bold mb-4'>{legend}</legend>
+    <legend className='sr-only'>Items</legend>
     {items.map(({ key, value, type }, index) => (
-      <div key={index} className='mb-4 flex'>
+      <div key={index} className='flex mb-2'>
         <Select className='mr-2' onChange={(event) => setItems([
           ...items.slice(0, index),
           { key, value, type: event.target.value },
@@ -42,13 +43,14 @@ export default ({ items, setItems, legend, className }) => (
             ...items.slice(index + 1)
           ])}
         />
-        <Button type='button' onClick={() => setItems([ ...items.slice(0, index), ...items.slice(index + 1) ])}>
-          Remove
+        
+        <Button ghost type='button' className='rounded-r-none' onClick={() => setItems([ ...items.slice(0, index + 1), emptyItem, ...items.slice(index + 1) ])}>
+          <Plus />
+        </Button>
+        <Button type='button' className='rounded-l-none' onClick={() => setItems([ ...items.slice(0, index), ...items.slice(index + 1) ])}>
+          <Trash2 />
         </Button>
       </div>
     ))}
-    <Button ghost type='button' onClick={() => setItems([ ...items, { key: '', value: '' }])}>
-      Add
-    </Button>
   </fieldset>
 )

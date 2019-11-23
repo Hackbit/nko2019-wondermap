@@ -25,30 +25,36 @@ const Page = ({ user: initialProfile, cards: initialCards, list }) => {
 
   return (
     <Layout profile={profile}>
-      <Heading>The Cards of {profile.data ? profile.data.user.name : 'Loading...'}</Heading>
+      <Heading className='mb-12'>
+        The Cards in {list.name}
+      </Heading>
 
-      <form className='mb-16' onSubmit={async (event) => {
-        event.preventDefault()
-        if (items.length > 0) {
-          setItems([ emptyItem ])
-          await authedFetch({}, '/api/add-card', { items, list })
-          mutate(cardsUrl, { cards: [
-            ...cards.data.cards,
-            { items, _id: Math.random() }
-          ] })
-        }
-      }}>
-        <Card className='mb-4'>
+      <Card className='mb-16'>
+        <form onSubmit={async (event) => {
+          event.preventDefault()
+          if (items.length > 0) {
+            setItems([ emptyItem ])
+            await authedFetch({}, '/api/add-card', { items, list })
+            mutate(cardsUrl, { cards: [
+              ...cards.data.cards,
+              { items, _id: Math.random() }
+            ] })
+          }
+        }}>
+          <Heading level={2}>
+            New Card
+          </Heading>
           <ItemsInput
             items={items}
             setItems={setItems}
-            legend='Items'
+            emptyItem={emptyItem}
+            className='mb-4'
           />
-        </Card>
-        <Button type='submit' disabled={items.length === 0}>
-          Submit!
-        </Button>
-      </form>
+          <Button type='submit' disabled={items.length === 0}>
+            Submit!
+          </Button>
+        </form>
+      </Card>
 
       <div className='grid'>
         {cards.data ? cards.data.cards.map((data, cardIndex) => (
