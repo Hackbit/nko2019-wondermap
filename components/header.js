@@ -15,23 +15,28 @@ export default ({ className, profile: defaultProfile }) => {
               <a className='hover:underline'>Home</a>
             </Link>
           </li>
-          <li>
-            <Link href='/profile'>
-              <a className='hover:underline'>Profile</a>
-            </Link>
-          </li>
         </ul>
         <ul className='flex items-center'>
           {(profile.error || !profile.data) ? (
-            <Link href='/login'>
-              <LinkButton>Login</LinkButton>
-            </Link>
+            <li>
+              <Link href='/login'>
+                <LinkButton>Login</LinkButton>
+              </Link>
+            </li>
           ) : (<>
-            <Button onClick={logout}>Logout</Button>
-            <img
-              src={`https://api.adorable.io/avatars/285/${encodeURIComponent(profile.data.user.username)}.png`}
-              className='h-10 w-10 ml-4 rounded-full object-cover'
-            />
+            <li>
+              <Button onClick={logout}>Logout</Button>
+            </li>
+            <li>
+              <Link href='/profile'>
+                <a className='ml-4 rounded-full focus:outline-none focus:shadow-outline hover:shadow-outline block transitions'>
+                  <img
+                    src={`https://api.adorable.io/avatars/285/${encodeURIComponent(profile.data.user.username)}.png`}
+                    className='h-10 w-10 rounded-full object-cover'
+                  />
+                </a>
+              </Link>
+            </li>
           </>)}
         </ul>
       </nav>
