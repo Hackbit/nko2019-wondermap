@@ -27,7 +27,9 @@ export default async (req, res) => {
     if (!list) return res.status(404).json({ message: 'List not found' })
 
     const cards = await Card.find({ list })
-    return res.status(200).json({ cards, list })
+
+    const hasAccess = user && user._id.toString() === list.user.toString()
+    return res.status(200).json({ cards, list, hasAccess })
   } catch (error) {
     return res.status(400).json({ message: error.message })
   }

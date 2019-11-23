@@ -17,7 +17,7 @@ const emptyItem = {
   type: 'TEXT'
 }
 
-const Page = ({ user: initialProfile, cards: initialCards, list }) => {
+const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) => {
   const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: { user: initialProfile } })
   const cardsUrl = `/api/list?sharingId=${encodeURIComponent(list.sharingId)}`
   const cards = useSWR(cardsUrl, swrAuthedFetch, { initialData: { cards: initialCards} })
@@ -29,7 +29,7 @@ const Page = ({ user: initialProfile, cards: initialCards, list }) => {
         The Cards in {list.name}
       </Heading>
 
-      <Card className='mb-16'>
+      {hasAccess && <Card className='mb-16'>
         <form onSubmit={async (event) => {
           event.preventDefault()
           if (items.length > 0) {
@@ -54,7 +54,7 @@ const Page = ({ user: initialProfile, cards: initialCards, list }) => {
             Submit!
           </Button>
         </form>
-      </Card>
+      </Card>}
 
       <div className='grid'>
         {cards.data ? cards.data.cards.map((data, cardIndex) => (
@@ -95,8 +95,8 @@ Page.getInitialProps = async (ctx) => {
 
   try {
     const sharingId = ctx.query.sharingId
-    const { cards, list } = await authedFetch(ctx, `/api/list?sharingId=${encodeURIComponent(sharingId)}`)
-    return { user, cards, list }
+    const { cards, list, hasAccess } = await authedFetch(ctx, `/api/list?sharingId=${encodeURIComponent(sharingId)}`)
+    return { user, cards, list, hasAccess }
   } catch (error) {
     console.log(error)
     return await redirectOnError()
