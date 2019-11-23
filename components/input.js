@@ -4,6 +4,7 @@ export default (props) => (
     w-full py-2 px-4
     bg-dark-3 leading-tight
     focus:outline-none focus:shadow-outline
+    transitions
     ${props.className || ''}
   `} />
 )
