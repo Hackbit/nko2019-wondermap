@@ -1,3 +1,6 @@
 {
-  "name": "wondermap"
+  "name": "wondermap",
+  "env": {
+    "MONGO_CONNECTION_URL": "@wondermap-mongo-connection-url"
+  }
 }
