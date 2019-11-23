@@ -1,10 +1,11 @@
 import getUser from '../../lib/server/get-user'
-import { Card, List } from '../../lib/server/db'
+import { connect, Card, List } from '../../lib/server/db'
 
 export default async (req, res) => {
   const sharingId = req.query.sharingId
 
   try {
+    await connect()
     if (typeof sharingId !== 'string' || sharingId.length === 0) {
       throw new Error('No sharing id')
     }

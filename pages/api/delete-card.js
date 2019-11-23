@@ -1,10 +1,11 @@
 import getUser from '../../lib/server/get-user'
-import { Card } from '../../lib/server/db'
+import { connect, Card } from '../../lib/server/db'
 
 export default async (req, res) => {
   const { id } = await req.body
 
   try {
+    await connect()
     if (typeof id !== 'string' || id.length === 0) {
       throw new Error('No id')
     }

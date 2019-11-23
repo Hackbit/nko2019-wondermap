@@ -1,8 +1,9 @@
 import getUser from '../../lib/server/get-user'
-import { List } from '../../lib/server/db'
+import { connect, List } from '../../lib/server/db'
 
 export default async (req, res) => {
   try {
+    await connect()
     const user = await getUser(req)
     if (!user) return res.status(401).json({ message: 'Not logged in' })
 

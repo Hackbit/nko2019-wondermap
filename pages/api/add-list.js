@@ -1,11 +1,12 @@
 import uid from 'uid-promise'
 import getUser from '../../lib/server/get-user'
-import { List, Card } from '../../lib/server/db'
+import { connect, List, Card } from '../../lib/server/db'
 
 export default async (req, res) => {
   const { name } = await req.body
 
   try {
+    await connect()
     if (typeof name !== 'string' || name.trim().length === 0) {
       throw new Error('No name')
     }

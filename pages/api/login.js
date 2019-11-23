@@ -1,9 +1,10 @@
-import { User } from '../../lib/server/db'
+import { connect, User } from '../../lib/server/db'
 
 export default async (req, res) => {
   const { username } = await req.body
   
   try {
+    await connect()
     if (typeof username !== 'string' || username.trim().length === 0) {
       throw new Error('No username')
     }
