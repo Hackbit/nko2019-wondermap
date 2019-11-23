@@ -15,7 +15,7 @@ const Page = ({ user }) => {
   const [ items, setItems ] = useState([{}])
 
   return (
-    <Layout>
+    <Layout profile={profile}>
       <Heading>The Cards of {profile.data ? profile.data.user.name : 'Loading...'}</Heading>
       <p className='mb-20'>{profile.data ? profile.data.user.username : 'Loading...'}</p>
 
@@ -43,7 +43,7 @@ const Page = ({ user }) => {
       </form>
 
       <div className='grid'>
-        {cards.data ? cards.data.cards.map((data) => (
+        {cards.data ? cards.data.cards.map((data, cardIndex) => (
           <Card key={data._id}>
             {data.items.map(({ key, value }, index) => (
               <div className='mb-1' key={index}>
@@ -51,6 +51,15 @@ const Page = ({ user }) => {
                 <div>{value}</div>
               </div>
             ))}
+            <Button onClick={async () => {
+              await authedFetch({}, '/api/delete-card', { id: data._id })
+              mutate('/api/cards', { cards: [
+                ...cards.data.cards.slice(0, cardIndex),
+                ...cards.data.cards.slice(cardIndex + 1)
+              ] })
+            }}>
+              Delete
+            </Button>
           </Card>
         )): 'Loading...'}
       </div>
