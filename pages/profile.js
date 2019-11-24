@@ -26,7 +26,7 @@ const Page = ({ user }) => {
   }
 
   return (
-    <Layout profile={profile}>
+    <Layout profile={profile} title='Lists'>
       <Modal
         isOpen={showModal}
         onRequestClose={close}

@@ -37,7 +37,7 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
   }
 
   return (
-    <Layout profile={profile}>
+    <Layout profile={profile} title={list.name}>
       <Modal
         isOpen={showModal}
         onRequestClose={close}

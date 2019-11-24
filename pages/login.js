@@ -48,7 +48,7 @@ export default () => {
   }
 
   return (
-    <Layout centered>
+    <Layout centered title='Get Started'>
       <Heading level={1} className='text-center'>Get Started</Heading>
       <Card className='max-w-sm mx-auto'>
         <form onSubmit={handleSubmit}>

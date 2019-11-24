@@ -12,7 +12,13 @@ export default ({ className, profile: defaultProfile }) => {
         <ul className='flex items-center'>
           <li className='mr-4'>
             <Link href='/'>
-              <a className='hover:underline'>Home</a>
+              <a>
+                <img
+                  src='/images/full.png'
+                  className='block h-10'
+                  alt='Home'
+                />
+              </a>
             </Link>
           </li>
         </ul>
