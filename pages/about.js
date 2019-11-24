@@ -35,11 +35,14 @@ export default () => (
       About WonderMap
     </Heading>
 
-    <p className='mb-12'>
+    <p className='mb-4'>
       WonderMap is a 48-hour project created by two programmers in a sparse amount of time.{' '}
       It's intended to be a Google Keep and Evernote hybrid, with sharing functionality and notes.{' '}
       We got quite far, but a few things that are planned for the future include teams and projects for{' '}
       better sharing, better authentication, cleaner code, and a mind map style view.
+    </p>
+    <p className='mb-12'>
+      For the record, this entire website was entirely thought up, designed, styled, and scripted by us.
     </p>
 
     <div className='grid'>
