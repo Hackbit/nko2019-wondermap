@@ -69,7 +69,7 @@ const Page = ({ user }) => {
       </Modal>
 
       <Heading bottom={12}>
-        The Lists of {profile.data ? profile.data.user.name : 'Loading...'}{' '}
+        Your Lists{' '}
         
         <Button
           ghost className='ml-4 align-top rounded-full'
