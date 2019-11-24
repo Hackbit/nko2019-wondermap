@@ -25,24 +25,24 @@ export default () => (
       Our minds are always racing. We can help you save <span className='text-dark-4'>(almost)</span> every thought.
     </p>
 
-    <div className='mx-auto mb-20 text-center'>
+    <div className='mx-auto mb-20 sm:text-center'>
       <Link href='/login'>
         <LinkButton>Get started</LinkButton>
       </Link>
     </div>
 
     <Heading level={2} className='sm:text-center'><span aria-hidden>📝</span> Rich Cards</Heading>
-    <p className='text-light-3 max-w-md text-center mx-auto mb-16'>
+    <p className='text-light-3 max-w-md sm:text-center mx-auto mb-16'>
       Store content in structured JSON-like cards, with rich metadata including images and embeds. And plain old text if you want to be boring.
     </p>
 
     <Heading level={2} className='sm:text-center'><span aria-hidden>👥</span> Sharing</Heading>
-    <p className='text-light-3 max-w-md text-center mx-auto mb-16'>
+    <p className='text-light-3 max-w-md sm:text-center mx-auto mb-16'>
       Want to pester your long-lost family with your Christmas wish list? We have your back!
     </p>
 
     <Heading level={2} className='sm:text-center'><span aria-hidden>🐛</span> Bugs</Heading>
-    <p className='text-light-3 max-w-md text-center mx-auto'>
+    <p className='text-light-3 max-w-md sm:text-center mx-auto'>
       Two people made this in 48 hours for Node Knockout, so expect tons of bugs in an otherwise useful service.
     </p>
   </Layout>
