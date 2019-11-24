@@ -30,11 +30,11 @@ export default ({ children, centered, title, profile }) => {
       <meta name='twitter:description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
       <meta name='twitter:image:src' content='https://wondermap.now.sh/images/banner.png' />
 
-      <meta name='og:title' content='WonderMap' />
+      <meta name='og:title' content={title || 'WonderMap'} />
       <meta name='og:description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
       <meta name='og:image' content='https://wondermap.now.sh/images/banner.png' />
       <meta name='og:url' content={url} />
-      <meta name='og:site_name' content={title || 'WonderMap'} />
+      <meta name='og:site_name' content='WonderMap' />
       <meta name='og:locale' content='en_US' />
       <meta name='og:type' content='website' />
     </Head>
