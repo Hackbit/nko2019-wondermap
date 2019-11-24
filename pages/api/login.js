@@ -9,9 +9,9 @@ export default async (req, res) => {
       throw new Error('No username')
     }
 
-    const foundUser = await User.findOne({ username })
+    const foundUser = await User.findOne({ username: username.trim() })
     if (!foundUser) {
-      const user = new User({ username })
+      const user = new User({ username: username.trim() })
       await user.save()
     }
 

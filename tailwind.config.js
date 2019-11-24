@@ -11,7 +11,8 @@ module.exports = {
       // primary: '#5e81ac',
       // primary: '#7950f2',
       primary: '#f15a22',
-      error: '#bF616a',
+      error: '#bf616a',
+      overlay: '#0000007a',
 
       light: {
         1: '#eceff4',

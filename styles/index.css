@@ -14,6 +14,15 @@
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   @apply bg-dark-1 text-light-2 font-primary;
 }
@@ -34,6 +43,10 @@ body {
 
 .loading {
   animation: loading 1s ease-in-out infinite;
+}
+
+.spin {
+  animation: spin 2s linear infinite;
 }
 
 .hover\:up:hover {

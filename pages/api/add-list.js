@@ -17,7 +17,7 @@ export default async (req, res) => {
     const sharingId = await uid(20)
     const list = new List({
       user,
-      name,
+      name: name.trim(),
       sharingId,
       isPublic: false
     })

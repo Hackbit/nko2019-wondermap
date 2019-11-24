@@ -2,7 +2,6 @@ import '../styles/index.css'
 import { useState, useEffect } from 'react'
 import Typing from 'react-typing-animation'
 import Layout from '../components/layout'
-import Card from '../components/card'
 import Heading from '../components/heading'
 
 const verbs = ['Save', 'Share', 'Organize', 'Capture', 'List', 'Yeet']
@@ -18,7 +17,7 @@ export default () => {
 
   return (
     <Layout>
-      <Heading level={1} className='mb-6 sm:text-4xl sm:text-center'>
+      <Heading level={1} bottom={6} className='sm:text-4xl sm:text-center'>
         <Typing className='inline' cursor={<span className='font-normal'>|</span>}>
           <span>{verbs[verb]}</span>
           <Typing.Delay ms={1000} />

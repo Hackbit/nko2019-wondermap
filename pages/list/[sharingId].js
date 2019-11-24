@@ -3,6 +3,8 @@ import { useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import { Trash2, Share } from 'react-feather'
 import Router from 'next/router'
+import Modal from 'react-modal'
+import Input from '../../components/input'
 import Button from '../../components/button'
 import Layout from '../../components/layout'
 import Card, { CardLoader, CardIcon } from '../../components/card'
@@ -23,18 +25,74 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
   const cards = useSWR(cardsUrl, swrAuthedFetch, { initialData: { cards: initialCards} })
   const [ items, setItems ] = useState([ emptyItem ])
 
+  const [ showModal, setShowModal ] = useState(false)
+  const [ sharing, setSharing ] = useState(false)
+  const [ tempPublic, setTempPublic ] = useState(list.isPublic)
+  const close = () => {
+    setTempPublic(list.isPublic)
+    setSharing(false)
+    setShowModal(false)
+  }
+
   return (
     <Layout profile={profile}>
-      <Heading className='mb-12'>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={close}
+        overlayClassName='z-40 fixed top-0 p-2 left-0 right-0 bottom-0 bg-overlay flex flex-col items-center sm:justify-center'
+        className='z-50 w-full p-8 max-w-xl bg-dark-2 rounded-lg focus:outline-none'
+        ariaHideApp={false}
+      >
+        <Heading level={2} bottom={2}>Sharing Settings</Heading>
+        <p className='mb-6'>
+          If you publicize this list anyone with the link will be able to see it, but not edit it.
+        </p>
+
+        <form onSubmit={async (event) => {
+          event.preventDefault()
+          setSharing(true)
+          await authedFetch({}, '/api/share', { sharingId: list.sharingId, isPublic: tempPublic })
+          setSharing(false)
+          setShowModal(false)
+        }}>
+          <label className='block font-bold mb-2 cursor-pointer'>
+            <input
+              className='mr-2 leading-tight align-center'
+              type='checkbox'
+              checked={tempPublic}
+              onChange={(event) => setTempPublic(event.target.checked)}
+            />
+            <span className='text-md leading-tight'>
+              Public
+            </span>
+          </label>
+
+          {tempPublic && (
+            <Input
+              readOnly
+              placeholder='Sharing URL'
+              aria-label='Sharing URL'
+              value={typeof window === 'undefined' ? '(loading)' : window.location.href}
+            />
+          )}
+
+          <div className='mt-6'>
+            <Button className='rounded-r-none' loading={sharing} type='submit'>
+              Save
+            </Button>
+            <Button type='button' ghost onClick={close} className='rounded-l-none'>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </Modal>
+
+      <Heading bottom={12}>
         {list.name}
 
         {hasAccess && (<>{' '}<Button
           ghost className='ml-4 align-top rounded-full'
-          onClick={async () => {
-            const isPublic = confirm('Should your list be public?')
-            await authedFetch({}, '/api/share', { sharingId: list.sharingId, isPublic })
-            alert('Done! Copy the URL.')
-          }}
+          onClick={() => setShowModal(true)}
         >
           <Share />
         </Button></>)}
