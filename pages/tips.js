@@ -59,6 +59,11 @@ export default () => (
       pop up with a beautiful colorful banner and some metadata.
     </p>
 
+    <Heading level={2}>Profiles</Heading>
+    <p className='mb-10'>
+      On the topic of sharing, you also have a user profile link you can share. It'll show your name, username, and all your public lists!
+    </p>
+
     <Heading level={2}>Keyless Values</Heading>
     <p className='mb-10'>
       It's totally fine to have values without keys! This is especially useful when you just want a card with an embed{' '}
