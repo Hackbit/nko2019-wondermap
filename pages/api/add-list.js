@@ -35,6 +35,11 @@ export default async (req, res) => {
           type: 'TEXT',
           key: 'Next steps',
           value: 'Feel free to explore the interface and create a few cards.'
+        },
+        {
+          type: 'EMBED',
+          key: 'Tips and tricks',
+          value: 'https://wondermap.now.sh/tips'
         }
       ]
     })

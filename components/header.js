@@ -8,9 +8,9 @@ export default ({ className, profile: defaultProfile }) => {
 
   return (
     <header className={`bg-dark-2 p-4 mb-10 fixed w-full top-0 z-30 ${className || ''}`}>
-      <nav className='flex items-center justify-between max-w-5xl mx-auto'>
-        <ul className='flex items-center'>
-          <li className='mr-4'>
+      <nav className='sm:flex items-center justify-between max-w-5xl mx-auto'>
+        <ul className='flex items-center mb-4 sm:mb-0'>
+          <li className='mr-6'>
             <Link href='/'>
               <a>
                 <img
@@ -19,6 +19,16 @@ export default ({ className, profile: defaultProfile }) => {
                   alt='Home'
                 />
               </a>
+            </Link>
+          </li>
+          <li className='mr-4'>
+            <Link href='/about'>
+              <a className='hover:underline hover:text-light-1'>About</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/tips'>
+              <a className='hover:underline hover:text-light-1'>Tips</a>
             </Link>
           </li>
         </ul>

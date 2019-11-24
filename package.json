@@ -18,9 +18,11 @@
     "react-dom": "^16.8.6",
     "react-feather": "^2.0.3",
     "react-markdown": "^4.2.2",
+    "react-mathjax": "^1.0.1",
     "react-modal": "^3.11.1",
     "react-truncate-markup": "^4.1.0",
     "react-typing-animation": "^1.6.2",
+    "remark-math": "^2.0.0",
     "swr": "^0.1.12",
     "uid-promise": "^1.1.0"
   },

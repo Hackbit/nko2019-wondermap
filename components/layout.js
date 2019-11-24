@@ -22,9 +22,9 @@ export default ({ children, centered, title, profile }) => {
       <meta name='description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
       <meta name='image' content='https://wondermap.now.sh/images/banner.png' />
 
-      <meta itemprop='name' content={formattedTitle} />
-      <meta itemprop='description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
-      <meta itemprop='image' content='https://wondermap.now.sh/images/banner.png' />
+      <meta itemProp='name' content={formattedTitle} />
+      <meta itemProp='description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
+      <meta itemProp='image' content='https://wondermap.now.sh/images/banner.png' />
 
       <meta name='twitter:card' content='summary_large_image' />
       <meta name='twitter:title' content={formattedTitle} />

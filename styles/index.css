@@ -38,7 +38,7 @@ body {
 }
 
 .transitions {
-  transition: color 200ms, background 200ms, border 200ms, box-shadow 200ms, transform 200ms;
+  transition: color 200ms, background 200ms, border 200ms, box-shadow 200ms, transform 200ms, opacity 200ms;
 }
 
 .loading {
