@@ -10,13 +10,14 @@ export default ({ children, centered, title, profile }) => {
   return (<>
     <Head>
       <title>{formattedTitle}</title>
-      <link href={url} rel='canonical' />
+      <link href={url} rel='canonical' />=
 
       <link href='https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap' rel='stylesheet' />
       <link href='https://fonts.googleapis.com/css?family=Rubik:400i,700i&display=swap' rel='stylesheet' />
       <link href='/images/icon.png' rel='icon' />
       <link href='/images/icon.png' rel='shortcut icon' />
       <link href='/images/icon.png' rel='apple-touch-icon' />
+      <link href='/manifest.json' rel='manifest' />
 
       <meta name='theme-color' content='#f15a22' />
       <meta name='description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
