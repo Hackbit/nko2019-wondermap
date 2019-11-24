@@ -16,8 +16,8 @@ const dependencies = [
     key: 'nodejs'
   },
   {
-    name: 'Feather Icons',
-    key: 'feather'
+    name: 'Tailwind.css',
+    key: 'tailwind'
   },
   {
     name: 'MongoDB',
@@ -44,12 +44,11 @@ export default () => (
 
     <div className='grid'>
       {dependencies.map(({ name, key }) => (
-        <div key={key} className='p-2 opacity-50 hover:opacity-100 transitions bg-white h-32 rounded-lg flex flex-col items-center justify-center' title={name}>
+        <div key={key} className='p-2 opacity-75 hover:opacity-100 transitions bg-white h-32 rounded-lg flex flex-col items-center justify-center' title={name}>
           <img src={`/images/${key}.svg`} style={{ maxWidth: '50%', maxHeight: '6rem', height: '100%' }} alt={name} />
         </div>
       ))}
     </div>
-
     <p className='mt-2 text-center text-light-3'>
       This wouldn't have been possible without tons of awesome projects.
     </p>
