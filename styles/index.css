@@ -84,3 +84,28 @@ body {
 .markdown ol {
   @apply list-decimal;
 }
+
+.progress::-webkit-progress-bar {
+  @apply rounded bg-dark-4;
+}
+
+.progress::-webkit-progress-value {
+  @apply rounded;
+  transition: width 400ms ease;
+}
+
+.progress-red::-webkit-progress-value {
+  background-color: #e2403e;
+}
+
+.progress-orange::-webkit-progress-value {
+  background-color: #ffdf5e;
+}
+
+.progress-blue::-webkit-progress-value {
+  background-color: #13b8ff;
+}
+
+.progress-green::-webkit-progress-value {
+  background-color: #48ff70;
+}
