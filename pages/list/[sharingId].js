@@ -136,13 +136,13 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
                 <Value value={value} type={type} />
               </div>
             ))}
-            <CardIcon icon={Trash2} onClick={async () => {
+            {hasAccess && (<CardIcon icon={Trash2} onClick={async () => {
               await authedFetch({}, '/api/delete-card', { id: data._id })
               mutate(cardsUrl, { cards: [
                 ...cards.data.cards.slice(0, cardIndex),
                 ...cards.data.cards.slice(cardIndex + 1)
               ] })
-            }} />
+            }} />)}
           </Card>
         )): [ <CardLoader />, <CardLoader />, <CardLoader /> ]}
       </div>
