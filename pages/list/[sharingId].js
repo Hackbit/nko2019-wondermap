@@ -23,7 +23,9 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
   const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: { user: initialProfile } })
   const cardsUrl = `/api/list?sharingId=${encodeURIComponent(list.sharingId)}`
   const cards = useSWR(cardsUrl, swrAuthedFetch, { initialData: { cards: initialCards} })
+
   const [ items, setItems ] = useState([ emptyItem ])
+  const [ adding, setAdding ] = useState(false)
 
   const [ showModal, setShowModal ] = useState(false)
   const [ sharing, setSharing ] = useState(false)
@@ -101,14 +103,14 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
       {hasAccess && <Card className='mb-16'>
         <form onSubmit={async (event) => {
           event.preventDefault()
-          if (items.length > 0) {
-            setItems([ emptyItem ])
-            await authedFetch({}, '/api/add-card', { items, list })
-            mutate(cardsUrl, { cards: [
-              ...cards.data.cards,
-              { items, _id: Math.random() }
-            ] })
-          }
+          setAdding(true)
+          setItems([ emptyItem ])
+          await authedFetch({}, '/api/add-card', { items, list })
+          mutate(cardsUrl, { cards: [
+            ...cards.data.cards,
+            { items, _id: Math.random() }
+          ] })
+          setAdding(false)
         }}>
           <Heading level={2}>
             New Card
@@ -119,8 +121,8 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
             emptyItem={emptyItem}
             className='mb-4'
           />
-          <Button type='submit' disabled={items.length === 0}>
-            Submit!
+          <Button type='submit' disabled={items.length === 0} loading={adding}>
+            Add!
           </Button>
         </form>
       </Card>}
