@@ -42,11 +42,12 @@ export default ({ children, centered, title, profile }) => {
 
     <Header profile={profile} />
 
-    <main className={centered ? 'h-screen flex flex-col justify-center content-center p-4' : 'mt-32 p-4'}>
+    <main className={centered ? 'h-screen flex flex-col justify-center content-center p-4' : 'mt-32 p-4 mb-16'}>
       <div className={centered ? '' : 'max-w-5xl mx-auto'}>
         {children}
       </div>
     </main>
+
     <Footer/>
   </>)
 }
