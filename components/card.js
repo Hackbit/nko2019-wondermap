@@ -23,7 +23,7 @@ export const LinkCard = forwardRef((props, ref) => (
     focus:outline-none focus:shadow-outline
     hover:up cursor-pointer
     ${props.className || ''}
-  `} ref={ref} tabIndex={0} />
+  `} ref={ref} />
 ))
 
 export const CardLoader = ({ className }) => (

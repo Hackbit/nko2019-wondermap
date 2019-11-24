@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import useSWR from 'swr'
-import { logout, swrAuthedFetch } from '../lib/client/auth'
-import Button, { LinkButton } from './button'
+import { swrAuthedFetch } from '../lib/client/auth'
+import { LinkButton } from './button'
 
 export default ({ className, profile: defaultProfile }) => {
   const profile = useSWR('/api/profile', swrAuthedFetch, defaultProfile)
@@ -35,13 +35,15 @@ export default ({ className, profile: defaultProfile }) => {
         <ul className='flex items-center'>
           {(profile.error || !profile.data) ? (
             <li>
-              <Link href='/login'>
+              <Link href='/login' passHref>
                 <LinkButton>Login</LinkButton>
               </Link>
             </li>
           ) : (<>
             <li>
-              <Button onClick={logout}>Logout</Button>
+              <Link href='/lists' passHref>
+                <LinkButton>Lists</LinkButton>
+              </Link>
             </li>
             <li>
               <Link href='/profile'>

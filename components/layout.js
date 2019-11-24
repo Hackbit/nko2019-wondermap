@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Header from './header'
-
+import Footer from './footer'
 export default ({ children, centered, title, profile }) => {
   const router = useRouter()
   const formattedTitle = title ? `${title} | WonderMap` : 'WonderMap'
@@ -47,5 +47,6 @@ export default ({ children, centered, title, profile }) => {
         {children}
       </div>
     </main>
+    <Footer/>
   </>)
 }
