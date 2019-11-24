@@ -18,7 +18,7 @@ export default ({ children, className, bottom, level = 1 }) => {
     )
   } else {
     return (
-      <h3 className={computedClassName}>
+      <h3 className={`${computedClassName} leading-tight`}>
         {children}
       </h3>
     )
