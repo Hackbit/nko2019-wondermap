@@ -15,6 +15,13 @@ export default (props) => (
   `} />
 )
 
+export const TextArea = (props) => (
+  <textarea {...props} rows={3} className={`
+    ${shared}
+    ${props.className || ''}
+  `} />
+)
+
 export const Select = (props) => (
   <div className={`inline-block relative w-full ${props.className || ''}`}>
     <select {...props} className={`
