@@ -13,6 +13,7 @@
     "mongoose": "^5.7.12",
     "next": "^9.0.1",
     "next-cookies": "^1.0.4",
+    "next-offline": "^4.0.6",
     "password-hash": "^1.2.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
