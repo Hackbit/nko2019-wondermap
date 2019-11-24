@@ -11,6 +11,7 @@ import Card, { CardLoader, CardIcon } from '../../components/card'
 import Heading from '../../components/heading'
 import Value from '../../components/value'
 import ItemsInput from '../../components/items-input'
+import { Masonry } from 'react-masonry-responsive'
 import { authedFetch, swrAuthedFetch, withAuthSync } from '../../lib/client/auth'
 
 const emptyItem = {
@@ -18,6 +19,12 @@ const emptyItem = {
   value: '',
   type: 'TEXT'
 }
+
+const placeholderTiles = [
+  { key: 0, node: <CardLoader /> },
+  { key: 1, node: <CardLoader /> },
+  { key: 2, node: <CardLoader /> }
+]
 
 const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) => {
   const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: { user: initialProfile } })
@@ -127,25 +134,30 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
         </form>
       </Card>}
 
-      <div className='grid'>
-        {cards.data ? cards.data.cards.map((data, cardIndex) => (
-          <Card key={data._id}>
-            {data.items.map(({ key, value, type }, index) => (
-              <div className='mb-3' key={index}>
-                <div className='font-bold text-light-1'>{key}</div>
-                <Value value={value} type={type} />
-              </div>
-            ))}
-            {hasAccess && (<CardIcon icon={Trash2} onClick={async () => {
-              await authedFetch({}, '/api/delete-card', { id: data._id })
-              mutate(cardsUrl, { cards: [
-                ...cards.data.cards.slice(0, cardIndex),
-                ...cards.data.cards.slice(cardIndex + 1)
-              ] })
-            }} />)}
-          </Card>
-        )): [ <CardLoader />, <CardLoader />, <CardLoader /> ]}
-      </div>
+      <Masonry
+        gap={10}
+        minColumnWidth={250}
+        items={cards.data ? cards.data.cards.map((data, cardIndex) => ({
+          key: data._id,
+          node: (
+            <Card>
+              {data.items.map(({ key, value, type }, index) => (
+                <div className='mb-3' key={index}>
+                  <div className='font-bold text-light-1'>{key}</div>
+                  <Value value={value} type={type} />
+                </div>
+              ))}
+              {hasAccess && (<CardIcon icon={Trash2} onClick={async () => {
+                await authedFetch({}, '/api/delete-card', { id: data._id })
+                mutate(cardsUrl, { cards: [
+                  ...cards.data.cards.slice(0, cardIndex),
+                  ...cards.data.cards.slice(cardIndex + 1)
+                ] })
+              }} />)}
+            </Card>
+          )
+        })): placeholderTiles}
+      />
     </Layout>
   )
 }

@@ -4,7 +4,7 @@ import Heading from '../components/heading'
 import { LinkButton } from '../components/button'
 
 export default () => (
-  <Layout title='About'>
+  <Layout title='Tips'>
     <Heading level={1} className='text-4xl'>
       Tips &amp; Tricks
     </Heading>

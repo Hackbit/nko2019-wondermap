@@ -27,7 +27,7 @@ export default ({ children, centered, title, profile }) => {
       <meta itemProp='image' content='https://wondermap.now.sh/images/banner.png' />
 
       <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:title' content={formattedTitle} />
+      <meta name='twitter:title' content={title || 'WonderMap'} />
       <meta name='twitter:description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
       <meta name='twitter:image:src' content='https://wondermap.now.sh/images/banner.png' />
 
