@@ -7,6 +7,7 @@ import Input from '../components/input'
 import Label from '../components/label'
 import Button from '../components/button'
 import Heading from '../components/heading'
+import PasswordMeter from '../components/password-meter'
 import { login } from '../lib/client/auth'
 
 export default () => {
@@ -70,6 +71,10 @@ export default () => {
             type='password'
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            className='mb-2'
+          />
+          <PasswordMeter
+            password={password}
             className='mb-6'
           />
 

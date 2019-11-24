@@ -114,8 +114,8 @@ const Page = ({ user: initialProfile, cards: initialCards, list, hasAccess }) =>
           setItems([ emptyItem ])
           await authedFetch({}, '/api/add-card', { items, list })
           mutate(cardsUrl, { cards: [
-            ...cards.data.cards,
-            { items, _id: Math.random() }
+            { items, _id: Math.random() },
+            ...cards.data.cards
           ] })
           setAdding(false)
         }}>

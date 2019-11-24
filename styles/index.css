@@ -50,7 +50,7 @@ body {
 }
 
 .hover\:up:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .border-box {
@@ -61,7 +61,7 @@ body {
   box-sizing: content-box;
 }
 
-.markdown p {
+.markdown p, .markdown ul, .markdown ol {
   @apply mb-2;
 }
 
@@ -75,4 +75,37 @@ body {
 
 .markdown a:hover {
   @apply underline;
+}
+
+.markdown ul {
+  @apply list-disc;
+}
+
+.markdown ol {
+  @apply list-decimal;
+}
+
+.progress::-webkit-progress-bar {
+  @apply rounded bg-dark-4;
+}
+
+.progress::-webkit-progress-value {
+  @apply rounded;
+  transition: width 400ms ease;
+}
+
+.progress-red::-webkit-progress-value {
+  background-color: #e2403e;
+}
+
+.progress-orange::-webkit-progress-value {
+  background-color: #ffdf5e;
+}
+
+.progress-blue::-webkit-progress-value {
+  background-color: #13b8ff;
+}
+
+.progress-green::-webkit-progress-value {
+  background-color: #48ff70;
 }

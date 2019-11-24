@@ -90,7 +90,7 @@ const Page = ({ user }) => {
                   This list is {data.isPublic ? 'public' : 'private'}.
                 </p>
                 <CardIcon icon={Trash2} onClick={async (event) => {
-                  event.stopPropagation()
+                  event.preventDefault()
                   await authedFetch({}, '/api/delete-list', { id: data._id })
                   mutate('/api/lists', { lists: [
                     ...lists.data.lists.slice(0, listIndex),
