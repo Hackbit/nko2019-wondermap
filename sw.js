@@ -11,7 +11,6 @@ workbox.routing.registerRoute(
 workbox.routing.setCatchHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document': {
-      console.log('Offline', caches.match('/offline'))
       return caches.match('/offline')
     }
     default: {
