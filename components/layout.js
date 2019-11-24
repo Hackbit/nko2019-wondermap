@@ -43,7 +43,7 @@ export default ({ children, centered, title, profile }) => {
     <Header profile={profile} />
 
     <div className='min-h-screen relative'>
-      <main className={centered ? 'h-screen flex flex-col justify-center content-center p-4' : 'p-4 pb-20 pt-32'}>
+      <main className={centered ? 'h-screen flex flex-col justify-center content-center p-4' : 'p-4 pb-20 pt-48 sm:pt-32'}>
         <div className={centered ? '' : 'max-w-5xl mx-auto'}>
           {children}
         </div>
