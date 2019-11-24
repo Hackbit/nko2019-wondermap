@@ -8,7 +8,12 @@ workbox.routing.registerRoute(
   })
 )
 
+workbox.routing.setDefaultHandler(
+  new workbox.strategies.NetworkOnly()
+)
+
 workbox.routing.setCatchHandler(({ event }) => {
+  console.log('OwO', event)
   switch (event.request.destination) {
     case 'document': {
       return caches.match('/offline')
