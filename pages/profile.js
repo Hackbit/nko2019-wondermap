@@ -23,7 +23,7 @@ const Page = ({ user }) => {
     <Layout profile={profile} title='Profile'>
       <Heading level={1}>
         {tempName.length ? tempName : 'No-Name'}{' '}
-        ({profile.data ? profile.data.user.username : 'Loading...'}){' '}
+        <span className='font-normal'>({profile.data ? profile.data.user.username : 'Loading...'})</span>{' '}
         <Link href={profile.data ? `/user/${encodeURIComponent(profile.data.user.username)}` : '#'} passHref>
           <LinkButton target='_blank' ghost className='ml-4 align-top rounded-full'>
             <ExternalLink />
