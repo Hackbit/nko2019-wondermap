@@ -13,6 +13,7 @@ export default ({ children, centered, title, profile }) => {
       <link href={url} rel='canonical' />
 
       <link href='https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap' rel='stylesheet' />
+      <link href='https://fonts.googleapis.com/css?family=Rubik:400i,700i&display=swap' rel='stylesheet' />
       <link href='/images/icon.png' rel='icon' />
       <link href='/images/icon.png' rel='shortcut icon' />
       <link href='/images/icon.png' rel='apple-touch-icon' />

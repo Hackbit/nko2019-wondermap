@@ -60,3 +60,19 @@ body {
 .content-box {
   box-sizing: content-box;
 }
+
+.markdown p {
+  @apply mb-2;
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  @apply mb-2 font-bold text-xl;
+}
+
+.markdown a {
+  @apply text-primary;
+}
+
+.markdown a:hover {
+  @apply underline;
+}
