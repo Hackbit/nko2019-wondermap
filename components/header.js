@@ -7,7 +7,7 @@ export default ({ className, profile: defaultProfile }) => {
   const profile = useSWR('/api/profile', swrAuthedFetch, defaultProfile)
 
   return (
-    <header className={`bg-dark-2 p-4 mb-10 fixed w-full top-0 ${className || ''}`}>
+    <header className={`bg-dark-2 p-4 mb-10 fixed w-full top-0 z-50 ${className || ''}`}>
       <nav className='flex items-center justify-between max-w-5xl mx-auto'>
         <ul className='flex items-center'>
           <li className='mr-4'>
