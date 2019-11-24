@@ -7,7 +7,7 @@ export default () => {
   const votes = useSWR('/api/votes', fetcher)
 
   return (
-    <footer className='bg-dark-2 p-4 mt-10 fixed w-full bottom-0 z-30'>
+    <footer className='bg-dark-2 px-4 py-2 mt-10 absolute w-full bottom-0 z-30'>
       <div className='sm:flex items-center justify-between max-w-5xl mx-auto'>
         <p>
           Created with ❤️ by{' '}

@@ -50,7 +50,7 @@ body {
 }
 
 .hover\:up:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .border-box {
@@ -61,7 +61,7 @@ body {
   box-sizing: content-box;
 }
 
-.markdown p {
+.markdown p, .markdown ul, .markdown ol {
   @apply mb-2;
 }
 
@@ -75,4 +75,12 @@ body {
 
 .markdown a:hover {
   @apply underline;
+}
+
+.markdown ul {
+  @apply list-disc;
+}
+
+.markdown ol {
+  @apply list-decimal;
 }
