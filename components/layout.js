@@ -17,7 +17,7 @@ export default ({ children, centered, title, profile }) => {
       <link href='/images/icon.png' rel='shortcut icon' />
       <link href='/images/icon.png' rel='apple-touch-icon' />
 
-      <meta name='theme-color' content='#f15a22'
+      <meta name='theme-color' content='#f15a22' />
       <meta name='description' content='WonderMap can help you calm the chaos of your amazing brain. Created for Node Knockout.' />
       <meta name='image' content='https://wondermap.now.sh/images/banner.png' />
 
