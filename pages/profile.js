@@ -1,43 +1,77 @@
 import '../styles/index.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { ExternalLink } from 'react-feather'
 import useSWR, { mutate } from 'swr'
 import Router from 'next/router'
-import Layout from '../components/layout'
+import Button, { LinkButton } from '../components/button'
 import Card from '../components/card'
-import ItemsInput from '../components/items-input'
-import { authedFetch, swrAuthedFetch, withAuthSync } from '../lib/client/auth'
+import Layout from '../components/layout'
+import Heading from '../components/heading'
+import Label from '../components/label'
+import Input from '../components/input'
+import { authedFetch, logout, swrAuthedFetch, withAuthSync } from '../lib/client/auth'
 
-const Page = ({ profile: initialProfile }) => {
-  const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: initialProfile })
-  const cards = useSWR('/api/cards', swrAuthedFetch)
-  const [ items, setItems ] = useState([])
+const Page = ({ user }) => {
+  const profile = useSWR('/api/profile', swrAuthedFetch, { initialData: { user } })
+  const [ tempName, setTempName ] = useState(profile.data ? profile.data.user.name : '')
+  const [ tempPW, setTempPW ] = useState('')
+  const [ updating, setUpdating ] = useState(false)
+  useEffect(() => setTempName(profile.data ? profile.data.user.name : ''), [ profile.data ])
 
   return (
-    <Layout>
-      <h1>{profile.data ? profile.data.user.name : 'Loading...'}</h1>
-      <p>{profile.data ? profile.data.user.username : 'Loading...'}</p>
+    <Layout profile={profile} title='Profile'>
+      <Heading level={1}>
+        {tempName.length ? tempName : 'No-Name'}{' '}
+        <span className='font-normal'>({profile.data ? profile.data.user.username : 'Loading...'})</span>{' '}
+        <Link href={profile.data ? `/user/${encodeURIComponent(profile.data.user.username)}` : '#'} passHref>
+          <LinkButton target='_blank' ghost className='ml-4 align-top rounded-full'>
+            <ExternalLink />
+          </LinkButton>
+        </Link>
+      </Heading>
 
-      {cards.data ? cards.data.cards.map((data) => <Card data={data} />): 'Loading...'}
+      <Card className='mb-8'>
+        <form onSubmit={async (event) => {
+          event.preventDefault()
+          setUpdating(true)
+          setTempPW('')
+          await authedFetch({}, '/api/update-profile', { name: tempName, password: tempPW })
+          mutate('/api/profile', {
+            user: {
+              ...profile.data.user,
+              name: tempName
+            }
+          })
+          setUpdating(false)
+        }}>
+          <Label htmlFor='name'>Name</Label>
+          <Input
+            type='text'
+            id='name'
+            name='name'
+            value={tempName}
+            className='mb-6'
+            onChange={(event) => setTempName(event.target.value)}
+          />
 
-      <form onSubmit={async (event) => {
-        event.preventDefault()
-        if (items.length > 0) {
-          await authedFetch({}, '/api/add-card', { items })
-          mutate('/api/cards', { cards: [
-            ...cards.data.cards,
-            { items, _id: Math.random() }
-          ] })
-        }
-      }}>
-        <ItemsInput
-          items={items}
-          setItems={setItems}
-          legend='Items'
-        />
-        <button type='submit' disabled={items.length === 0}>
-          Submit!
-        </button>
-      </form>
+          <Label htmlFor='password'>New password</Label>
+          <Input
+            type='password'
+            id='password'
+            name='password'
+            value={tempPW}
+            className='mb-6'
+            onChange={(event) => setTempPW(event.target.value)}
+          />
+
+          <Button loading={updating}>
+            Update
+          </Button>
+        </form>
+      </Card>
+
+      <Button ghost onClick={logout} className='w-full'>Log Out</Button>
     </Layout>
   )
 }

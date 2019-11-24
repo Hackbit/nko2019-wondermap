@@ -8,8 +8,9 @@ module.exports = {
 
       black: '#000000',
       white: '#ffffff',
-      primary: '#5e81ac',
-      error: '#bF616a',
+      primary: '#f15a22',
+      error: '#bf616a',
+      overlay: '#0000007a',
 
       light: {
         1: '#eceff4',
@@ -18,10 +19,10 @@ module.exports = {
       },
 
       dark: {
-        4: '#4c566a',
-        3: '#434c5e',
-        2: '#3b4252',
-        1: '#2e3440'
+        1: '#212529',
+        2: '#343a40',
+        3: '#3b4046',
+        4: '#51575d'
       }
     },
     extend: {
@@ -30,6 +31,9 @@ module.exports = {
       },
       borderColor: (theme) => ({
         default: theme('colors.dark.4')
+      }),
+      boxShadow: (theme) => ({
+        outline: `0 0 0 3px ${theme('colors.primary')}61`
       })
     }
   }

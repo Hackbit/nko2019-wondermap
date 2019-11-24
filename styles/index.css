@@ -2,6 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   @apply bg-dark-1 text-light-2 font-primary;
+}
+
+::selection {
+  @apply bg-primary text-light-1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+.transitions {
+  transition: color 200ms, background 200ms, border 200ms, box-shadow 200ms, transform 200ms, opacity 200ms;
+}
+
+.loading {
+  animation: loading 1s ease-in-out infinite;
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+.hover\:up:hover {
+  transform: translateY(-3px);
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.content-box {
+  box-sizing: content-box;
+}
+
+.markdown p {
+  @apply mb-2;
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  @apply mb-2 font-bold text-xl;
+}
+
+.markdown a {
+  @apply text-primary;
+}
+
+.markdown a:hover {
+  @apply underline;
 }
